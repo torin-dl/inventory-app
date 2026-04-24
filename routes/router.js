@@ -3,8 +3,8 @@ const dogsController = require("../controllers/dogsController");
 
 const router = Router();
 
-router.get("/"); // takes in parameter, controller filters list, renders list in partials
-router.post("/");
+router.get("/", dogsController.showDogsGet); // takes in parameter, controller filters list, renders list in partials
+router.post("/", dogsController.showDogsPost);
 router.get("/create");
 router.post("/create");
 router.get("/update");
