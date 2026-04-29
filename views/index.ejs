@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Inventory</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header class="mainHeader">
+        <h1>Pup Inventory</h1>
+    </header>
+    <%- include('partials/category.ejs') %>
+    <div class="dogsDisplay">
+     <% dogs.forEach(dog => { %>
+        <% if (includeNames) { %>
+            <%- include('partials/cardNamed.ejs', { dog: dog }) %>
+        <% } else { %>
+            <%- include('partials/cardGeneric.ejs', { dog: dog }) %>
+        <% } %>
+    <% })  %> 
+    </div>
+    <div class="updateSection">
+        <button class="addDog">Add Dog</button>
+        <button class="updateDog">Update Dog</button>
+        <button class="deleteDog">Delete Dog</button>
+    </div>
+</body>
+</html>

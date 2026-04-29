@@ -16,7 +16,7 @@ async function getAllBreeds() {
 
 async function getOneBreed(breed) {
     const { rows } = await pool.query(
-        "SELECT dogs.name AS dog_name, dogs.status, breeds.name AS breed_name, breeds.temperament, breeds.origin, breeds.photo FROM dogs JOIN breeds ON dogs.breed_id = breeds.id WHERE breeds.name = $1",
+        "SELECT dogs.name AS dog_name, dogs.status, breeds.name AS breed_name, breeds.temperament, breeds.origin, breeds.photo FROM dogs JOIN breeds ON dogs.breed_id = breeds.id WHERE REPLACE(breeds.name, ' ', '') = REPLACE($1, ' ', '')",
         [breed],
     );
     return rows;
@@ -26,12 +26,14 @@ async function getAvailableDogs() {
     const { rows } = await pool.query(
         "SELECT dogs.name AS dog_name, dogs.status, breeds.name AS breed_name, breeds.temperament, breeds.origin, breeds.photo FROM dogs JOIN breeds ON dogs.breed_id = breeds.id WHERE dogs.status = 'Available'",
     );
+    return rows;
 }
 
 async function getAdoptedDogs() {
     const { rows } = await pool.query(
         "SELECT dogs.name AS dog_name, dogs.status, breeds.name AS breed_name, breeds.temperament, breeds.origin, breeds.photo FROM dogs JOIN breeds ON dogs.breed_id = breeds.id WHERE dogs.status = 'Adopted'",
     );
+    return rows;
 }
 
 async function addDog() {}
