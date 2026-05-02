@@ -4,26 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dog Inventory</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/project.css">
 </head>
 <body>
-    <header class="mainHeader">
-        <h1>Pup Inventory</h1>
-    </header>
-    <%- include('partials/category.ejs') %>
-    <div class="dogsDisplay">
-     <% dogs.forEach(dog => { %>
-        <% if (includeNames) { %>
-            <%- include('partials/cardNamed.ejs', { dog: dog }) %>
-        <% } else { %>
-            <%- include('partials/cardGeneric.ejs', { dog: dog }) %>
-        <% } %>
-    <% })  %> 
-    </div>
-    <div class="updateSection">
-        <button class="addDog">Add Dog</button>
-        <button class="updateDog">Update Dog</button>
-        <button class="deleteDog">Delete Dog</button>
+    <div class="siteContainer">
+        <header class="siteHeader">
+            <div class="header-row">
+                <svg class="svg-user" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <h1 class="headingText">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paw-print-icon lucide-paw-print"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></svg>
+                    SoCal Dog Rescue
+                </h1>
+                <svg class="svg-search" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+            </div>
+            <ul>
+                <li>About Us</li>
+                <li>Donate</li>
+                <li>Contact</li>
+            </ul>
+        </header>
+        <div class="container">
+            <%- include('partials/category.ejs') %>
+            <div class="dogsDisplay">
+             <% dogs.forEach(dog => { %>
+                <% if (includeNames) { %>
+                    <%- include('partials/cardNamed.ejs', { dog: dog }) %>
+                <% } else { %>
+                    <%- include('partials/cardGeneric.ejs', { dog: dog }) %>
+                <% } %>
+            <% })  %>
+            </div>
+            <div class="updateSection">
+                <button class="addDog">Add Dog</button>
+                <button class="updateDog">Update Dog</button>
+                <button class="deleteDog">Delete Dog</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

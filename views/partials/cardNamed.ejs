@@ -1,10 +1,10 @@
 <div class="cardNamed">
-    <img src="<%= dog.photo %>" alt="Photo">
-    <h5 class="dogName">
+    <img class="cardPhoto" src="<%= dog.photo %>" alt="Photo">
+    <h4 class="cardTitle">
         <%= dog.dog_name %>
-    </h5>
-    <p class="breedName">
-        <%= dog.breed_name %> , <%= dog.temperament %>
+    </h4>
+    <p class="temperament">
+        Breed: <%= dog.breed_name %> , Temperament: <%= dog.temperament %>
     </p>
     <p class="countryOrigin">
         Origin: <%=dog.origin %>
