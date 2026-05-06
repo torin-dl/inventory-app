@@ -21,6 +21,10 @@
   font-style: normal;
 }
 
+body {
+    background-color: oklch(98.7% 0.004 236.62)
+}
+
 header {
     font-family: Spartan;
     background-color: var(--color-primary);
@@ -82,18 +86,31 @@ li + li::before {
     margin-left: 0
 }
 
-main {
+.container {
     font-family: Inter;
-    padding-block: var(--spacing);
 
 }
 
+.tagline {
+    color: rgb(71, 77, 87);
+    margin-left: 27px;
+    margin-top: 70px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
 .category {
+    margin-left: 27px;
     margin-right: 16px;
-    margin-top: 2.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 70px;
     display: flex;
     justify-content: center;
+}
+
+
+.categoryLabel {
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 .categorySelect {
@@ -101,14 +118,25 @@ main {
     margin-right: 8px;
 }
 
+.search {
+    background-color: var(--color-primary);
+    padding: 4px 10px 4px 10px
+}
+
 .cardPhoto {
     max-width: 100%;
-    height: 170px;
+    height: 180px;
     flex-grow: 0;
+    margin-bottom: 16px;
+    border-radius: 10px;
+}
+
+.temperament {
+    margin-bottom: 6px;
 }
 
 .countryOrigin {
-    margin-bottom: 0;
+    margin-bottom: 8px;
 }
 
 .cardGeneric, .cardNamed {
@@ -117,16 +145,29 @@ main {
     justify-content: center;
     align-items: center;
     padding: 5px 5px;
-    border: 3px solid;
-    border-color: var(--color-primary);
-    border-radius: 15px;
 
 }
 
 .dogsDisplay {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 15px
+    gap: 15px;
+    margin-bottom: 25px
 }
+
+.updateSection {
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 36px;
+}
+
+.updateSection button {
+    background-color: var(--color-primary);
+}
+
+
 
 
