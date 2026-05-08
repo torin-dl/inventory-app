@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include("partials/errors.ejs") %>
+    <form action="/create" method="POST">
+        <div class="form-group">
+            <label for="name">Name: </label>
+            <input type="text" class="form-input" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="breed">Breed: </label>
+            <input type="text" id="breed" name="breed" class="form-input">
+        </div>
+        <div class="form-group">
+            <fieldset>
+                <legend>Status: </legend>
+                <input type="radio" id="available" name="status" value="Available">
+                <label for="available">Available</label>
+                <input type="radio" id="adopted" name="status" value="Adopted">
+                <label for="adopted">Adopted</label>                
+            </fieldset>
+        </div>  
+        <button type="submit">Submit</button>      
+    </form>
+</body>
+</html>
