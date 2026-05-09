@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include("partials/errors.ejs") %>
+    <form action="/remove" method="POST">
+        <div class="form-group">
+            <fieldset>
+                <legend>Remove individual dog or breed group?</legend>
+                <input type="radio" id="remove_dog" name="category" value="remove_dog" required>
+                <label for="remove_dog">Dog</label>
+                <input type="radio" id="remove_breed" name="category" value="remove_breed" required>
+                <label for="remove_breed">Breed</label>                
+            </fieldset>
+        </div>  
+        <div class="form-group">
+            <label for="remove_id">ID: </label>
+            <input type="text" class="form-input" id="remove_id" name="remove_id">
+        </div>
+        <button type="submit">Submit</button>      
+    </form>    
+</body>
+</html>

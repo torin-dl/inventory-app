@@ -1,7 +1,18 @@
 const db = require("../db/queries");
 const { body, validationResult, matchedData } = require("express-validator");
 
-const validateMessage = [body("name").trim(), body("breed").trim(), body("status").trim(), body("dog_id").trim()];
+const validateAdd = [
+    body("name").trim().isLength({ min: 1, max: 16 }).withMessage(`Name must be less than 16 characters`),
+    body("breed").trim().isLength({ min: 2, max: 38 }).withMessage(`Breed must be less than 38 characters`),
+    body("status").trim().isAlpha(),
+];
+const validateUpdate = [
+    body("dog_id").trim(),
+    body("name").trim().isLength({ min: 1, max: 16 }).withMessage(`Name must be less than 16 characters`),
+    body("breed").trim().isLength({ min: 2, max: 38 }).withMessage(`Breed must be less than 38 characters`),
+    body("status").trim().isAlpha(),
+];
+const validateRemove = [body("category").trim(), body("remove_id").trim()];
 
 async function showDogsGet(req, res) {
     const dogs = await db.getAllBreeds();
@@ -28,7 +39,7 @@ function addDogGet(req, res) {
 }
 
 const addDogPost = [
-    validateMessage,
+    validateAdd,
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -38,7 +49,6 @@ const addDogPost = [
         }
 
         const { name, breed, status } = matchedData(req);
-
         try {
             await db.addDog(name, breed, status);
             res.redirect("/");
@@ -55,7 +65,7 @@ function updateDogGet(req, res) {
 }
 
 const updateDogPost = [
-    validateMessage,
+    validateUpdate,
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -76,6 +86,44 @@ const updateDogPost = [
     },
 ];
 
+function removeGet(req, res) {
+    res.render("remove");
+}
+
+const removePost = [
+    validateRemove,
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            console.log("tests");
+            return res.status(400).render("remove", {
+                errors: errors.array(),
+            });
+        }
+
+        const { category, remove_id } = matchedData(req);
+        if (category === "remove_dog") {
+            try {
+                await db.removeDog(remove_id);
+                res.redirect("/");
+            } catch (err) {
+                res.status(400).render("remove", {
+                    error: err.message,
+                });
+            }
+        } else {
+            try {
+                await db.removeBreed(remove_id);
+                res.redirect("/");
+            } catch (err) {
+                res.status(400).render("remove", {
+                    error: err.message,
+                });
+            }
+        }
+    },
+];
+
 module.exports = {
     showDogsGet,
     showDogsPost,
@@ -83,4 +131,6 @@ module.exports = {
     addDogPost,
     updateDogGet,
     updateDogPost,
+    removeGet,
+    removePost,
 };

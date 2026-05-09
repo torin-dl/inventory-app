@@ -66,4 +66,33 @@ async function updateDog(dog_id, name, breed, status) {
     ]);
 }
 
-module.exports = { getDogs, getAllBreeds, getOneBreed, getAvailableDogs, getAdoptedDogs, addDog, updateDog };
+async function removeDog(remove_id) {
+    const { rows } = await pool.query("SELECT * FROM dogs WHERE id = $1", [remove_id]);
+    if (rows.length === 0) {
+        throw new Error(`Dog ID "${remove_id}" not found`);
+    }
+
+    await pool.query("DELETE FROM dogs WHERE id = $1", [remove_id]);
+}
+
+async function removeBreed(remove_id) {
+    const { rows } = await pool.query("SELECT * FROM breeds WHERE id = $1", [remove_id]);
+    if (rows.length === 0) {
+        throw new Error(`Breed ID "${remove_id}" not found`);
+    }
+
+    await pool.query("DELETE FROM dogs WHERE breed_id = $1", [remove_id]);
+    await pool.query("DELETE FROM breeds WHERE id = $1", [remove_id]);
+}
+
+module.exports = {
+    getDogs,
+    getAllBreeds,
+    getOneBreed,
+    getAvailableDogs,
+    getAdoptedDogs,
+    addDog,
+    updateDog,
+    removeDog,
+    removeBreed,
+};
